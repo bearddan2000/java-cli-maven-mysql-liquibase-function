@@ -1,0 +1,14 @@
+<databaseChangeLog xmlns='http://www.liquibase.org/xml/ns/dbchangelog'
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+  xsi:schemaLocation='http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd'>
+  <changeSet id="010" author="ur">
+    <sql>
+      CREATE VIEW animal.breed_count AS
+      SELECT c.id, c.breed, animal.fn_breed_count(a.breedId ) as 'Breed Count'
+      FROM animal.dog as a
+      JOIN animal.breedLookup as c ON c.id = a.breedId
+      GROUP BY a.breedId;
+    </sql>
+  </changeSet>
+</databaseChangeLog>
